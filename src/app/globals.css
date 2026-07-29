@@ -1,0 +1,186 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ */
+/* Modo oscuro por clase (.dark en <html>), no por preferencia del SO. */
+/* Asi el usuario puede elegir con el boton del header.                */
+/* ------------------------------------------------------------------ */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ------------------------------------------------------------------ */
+/* Paleta de marca: Peña del Proletariado                              */
+/* Color base del logo: #7092bf                                        */
+/* ------------------------------------------------------------------ */
+@theme {
+  --color-brand-50: #f4f7fb;
+  --color-brand-100: #e6eef6;
+  --color-brand-200: #cddded;
+  --color-brand-300: #a8c3dd;
+  --color-brand-400: #7092bf;
+  --color-brand-500: #5f81b0;
+  --color-brand-600: #4d6b95;
+  --color-brand-700: #405879;
+  --color-brand-800: #384b65;
+  --color-brand-900: #324156;
+}
+
+/* ------------------------------------------------------------------ */
+/* Base                                                                */
+/* ------------------------------------------------------------------ */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-gray-50);
+    color: var(--color-gray-800);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .dark body {
+    background-color: var(--color-gray-900);
+    color: var(--color-gray-100);
+  }
+
+  /* Evita el zoom automatico de iOS al enfocar un input */
+  @media (max-width: 640px) {
+    input,
+    select,
+    textarea {
+      font-size: 16px;
+    }
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Componentes.                                                        */
+/*                                                                     */
+/* IMPORTANTE: van dentro de @layer components a proposito. Las        */
+/* utilidades de Tailwind viven en la capa "utilities", que es         */
+/* posterior, asi que pueden pisar estos estilos. Si estas reglas      */
+/* quedaran fuera de una capa, ganarian siempre y cosas como w-16      */
+/* sobre un .form-input no tendrian ningun efecto.                     */
+/* ------------------------------------------------------------------ */
+@layer components {
+  .form-input {
+    display: block;
+    width: 100%;
+    border-radius: 0.5rem;
+    border: 1px solid var(--color-gray-300);
+    background: #ffffff;
+    padding: 0.625rem 0.75rem;
+    color: var(--color-gray-900);
+    outline: none;
+    transition: border-color 120ms ease, box-shadow 120ms ease;
+  }
+
+  .form-input:focus {
+    border-color: var(--color-brand-400);
+    box-shadow: 0 0 0 3px rgba(112, 146, 191, 0.35);
+  }
+
+  .dark .form-input {
+    border-color: var(--color-gray-600);
+    background: var(--color-gray-800);
+    color: var(--color-gray-100);
+  }
+
+  .form-label {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-gray-700);
+  }
+
+  .dark .form-label {
+    color: var(--color-gray-300);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 0.5rem;
+    padding: 0.625rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.25rem;
+    cursor: pointer;
+    transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease;
+    /* area de toque comoda en mobile */
+    min-height: 2.75rem;
+  }
+
+  .btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(112, 146, 191, 0.45);
+  }
+
+  .btn-primary {
+    background-color: var(--color-brand-400);
+    color: #ffffff;
+    border: 1px solid transparent;
+  }
+
+  .btn-primary:hover {
+    background-color: var(--color-brand-500);
+  }
+
+  .btn-primary:active {
+    background-color: var(--color-brand-600);
+  }
+
+  .btn-secondary {
+    background-color: #ffffff;
+    color: var(--color-gray-700);
+    border: 1px solid var(--color-gray-300);
+  }
+
+  .btn-secondary:hover {
+    background-color: var(--color-gray-50);
+  }
+
+  .dark .btn-secondary {
+    background-color: var(--color-gray-800);
+    color: var(--color-gray-200);
+    border-color: var(--color-gray-600);
+  }
+
+  .dark .btn-secondary:hover {
+    background-color: var(--color-gray-700);
+  }
+
+  .btn-danger {
+    background-color: #ffffff;
+    color: #b91c1c;
+    border: 1px solid #fca5a5;
+  }
+
+  .btn-danger:hover {
+    background-color: #fef2f2;
+  }
+
+  .dark .btn-danger {
+    background-color: var(--color-gray-800);
+    color: #fca5a5;
+    border-color: #7f1d1d;
+  }
+
+  .card {
+    background-color: #ffffff;
+    border: 1px solid var(--color-gray-200);
+    border-radius: 0.75rem;
+  }
+
+  .dark .card {
+    background-color: var(--color-gray-800);
+    border-color: var(--color-gray-700);
+  }
+}

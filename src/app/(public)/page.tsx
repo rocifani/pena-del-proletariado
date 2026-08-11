@@ -44,8 +44,15 @@ export default async function HomePage() {
         </p>
         <h1 className="mt-1 text-xl font-bold sm:text-2xl">{torneo.tournament_name}</h1>
 
+        {torneo.description && (
+          <p className="mt-1 text-sm text-white/80">{torneo.description}</p>
+        )}
+
         {torneo.start_date && (
-          <p className="mt-1 text-sm text-white/80">Desde el {fecha(torneo.start_date)}</p>
+          <p className="mt-1 text-sm text-white/80">
+            Desde el {fecha(torneo.start_date)}
+            {torneo.end_date && <> hasta el {fecha(torneo.end_date)}</>}
+          </p>
         )}
 
         {torneo.leader_name && (

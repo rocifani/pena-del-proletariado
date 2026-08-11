@@ -73,6 +73,7 @@ export type Standing = {
 export type TournamentSummary = {
   tournament_id: string;
   tournament_name: string;
+  description: string | null;
   status: TournamentStatus;
   start_date: string | null;
   end_date: string | null;

@@ -307,7 +307,8 @@ select
      where m.tournament_id = t.id and m.status = 'completed') as total_matches_registered,
   ts.player_id as leader_player_id,
   ts.player_name as leader_name,
-  ts.total_points as leader_points
+  ts.total_points as leader_points,
+  t.description
 from public.tournaments t
 left join public.players wp on wp.id = t.winner_player_id
 left join public.tournament_standings ts

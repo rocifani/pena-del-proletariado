@@ -301,10 +301,14 @@ select
      from public.matchday_results mr
      join public.matchdays m on m.id = mr.matchday_id
      where m.tournament_id = t.id and m.status = 'completed') as participant_count,
-  (select coalesce(sum(mr.matches_won + mr.matches_lost), 0)
-     from public.matchday_results mr
-     join public.matchdays m on m.id = mr.matchday_id
-     where m.tournament_id = t.id and m.status = 'completed') as total_matches_registered,
+  (select coalesce(sum(md_totals.max_matches), 0)
+     from (
+       select mr.matchday_id, max(mr.matches_won + mr.matches_lost) as max_matches
+       from public.matchday_results mr
+       join public.matchdays m on m.id = mr.matchday_id
+       where m.tournament_id = t.id and m.status = 'completed'
+       group by mr.matchday_id
+     ) md_totals) as total_matches_registered,
   ts.player_id as leader_player_id,
   ts.player_name as leader_name,
   ts.total_points as leader_points,

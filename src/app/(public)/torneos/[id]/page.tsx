@@ -88,7 +88,12 @@ export default async function TorneoPublicoPage({
     porFecha.set(r.matchday_number, lista);
   }
 
-  const totalPartidos = resultados.reduce((acc, r) => acc + r.total_matches, 0);
+  // Todos los jugadores de una fecha compiten en los mismos partidos, así que
+  // la cantidad real jugada esa fecha es el máximo entre jugadores, no la suma.
+  const totalPartidos = [...porFecha.values()].reduce(
+    (acc, filas) => acc + Math.max(...filas.map((r) => r.total_matches)),
+    0
+  );
   const lider = standings[0] ?? null;
 
   return (

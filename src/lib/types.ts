@@ -96,6 +96,7 @@ export type MatchdayResultWithPoints = {
   matchday_number: number;
   played_at: string | null;
   matchday_status: MatchdayStatus;
+  matchday_notes: string | null;
   player_id: string;
   player_name: string;
   matches_won: number;

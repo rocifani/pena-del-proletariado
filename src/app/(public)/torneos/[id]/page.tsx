@@ -197,6 +197,11 @@ export default async function TorneoPublicoPage({
                         {fecha(filas[0]?.played_at)} · {filas.length} jugador
                         {filas.length === 1 ? "" : "es"}
                       </span>
+                      {filas[0]?.matchday_notes && (
+                        <span className="mt-0.5 block text-sm italic text-gray-600 dark:text-gray-300">
+                          "{filas[0].matchday_notes}"
+                        </span>
+                      )}
                     </span>
 
                     <span className="flex shrink-0 items-center gap-2">

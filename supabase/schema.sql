@@ -222,7 +222,8 @@ select
   greatest(
     t.minimum_points_per_matchday,
     mr.matches_won * t.points_per_win + mr.matches_lost * t.points_per_loss
-  ) as points
+  ) as points,
+  m.notes as matchday_notes
 from public.matchday_results mr
 join public.matchdays m on m.id = mr.matchday_id
 join public.tournaments t on t.id = m.tournament_id

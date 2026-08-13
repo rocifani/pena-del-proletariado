@@ -98,11 +98,13 @@ export default function MatchdayGrid({
     let jugadores = 0;
     let partidos = 0;
 
+    // Todos los jugadores de la fecha compiten en los mismos partidos, así que
+    // la cantidad real jugada es el máximo entre jugadores, no la suma.
     for (const f of filas) {
       const total = Number(f.g || 0) + Number(f.p || 0);
       if (total > 0) {
         jugadores += 1;
-        partidos += total;
+        partidos = Math.max(partidos, total);
       }
     }
 

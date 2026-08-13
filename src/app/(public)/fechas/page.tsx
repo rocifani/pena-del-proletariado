@@ -68,6 +68,12 @@ export default async function JornadasPage() {
               <Badge tone="brand">{resultados.length} jugadores</Badge>
             </div>
 
+            {resultados[0]?.matchday_notes && (
+              <p className="border-b border-gray-100 bg-brand-50 px-4 py-2 text-sm italic text-gray-700 dark:border-gray-700 dark:bg-gray-700/30 dark:text-gray-300">
+                "{resultados[0].matchday_notes}"
+              </p>
+            )}
+
             <ul className="divide-y divide-gray-100 dark:divide-gray-700">
               {resultados.map((r) => (
                 <li key={r.player_id} className="flex items-center gap-3 px-4 py-2.5">
